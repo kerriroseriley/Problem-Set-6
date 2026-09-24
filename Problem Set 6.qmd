@@ -8,6 +8,7 @@ format:
 
 Where did you encounter problems with this replication? Was there anything that was particularly tricky?
 
+I had a difficult time identifying which variables to use in the code book to replicate the figures, as there were over 6,000 columns. 
 
 
 How would you interpret (in other words, explain to a general audience) what Mondak and Sanders found in figures 1, 2, and 5?
