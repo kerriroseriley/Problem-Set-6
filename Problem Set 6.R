@@ -24,5 +24,6 @@ plot(x, y,
      main = "Line Plot")
 
 
-
 # Original Work: explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
+
+
