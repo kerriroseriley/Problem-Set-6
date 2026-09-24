@@ -7,7 +7,8 @@ plot(year, y,type = "l",
      main = "0-15 GSS Modified Stouffer Tolerance Battery, 1976-2024",
      xlab = "Year",
      ylab = "Tolerance Battery")
- 
+
+
 # Figure 2: Intolerance Towards Racists and Homosexuals, 1976-2024
 plot(year, y,
      type = "l",
