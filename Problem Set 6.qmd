@@ -1,7 +1,9 @@
 ---
 title: "Problem Set 6"
 author: "Kerri Riley"
-format: html
+format:
+  html: default
+  pdf: default
 ---
 
 Where did you encounter problems with this replication? Was there anything that was particularly tricky?
@@ -13,3 +15,4 @@ How would you interpret (in other words, explain to a general audience) what Mon
 
 
 Has anything changed since 1998 that would alter the substantive takeaway points in their findings?
+
