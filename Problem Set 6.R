@@ -2,6 +2,16 @@
 # Read the GSS data
 gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 
+# Variables for Analysis
+
+# spkath, colath, libath
+# spkrac, colrac, librac
+# spkcom, colcom, libcom
+# spkmil, colmil, libmil
+# spkhomo, colhomo, libhomo
+
+
+
 # Figure 1: 0-15 GSS Modified Stouffer Tolerance Battery, 1976-2024
 
 # Create plot
