@@ -45,16 +45,16 @@ gss <- gss|>
 # Recode dont know as 1
 # spkrac, colrac, libracgss
 gss <- gss|>
-  mutate(spkrach = case_when(
+  mutate(spkrac = case_when(
     spkrac %in% 1 ~ 0,
     spkrac %in% 2 ~ 1,
-    is_tagged_na(spkrach) & na_tag(spkrach) == "d" ~ 1,
+    is_tagged_na(spkrac) & na_tag(spkrac) == "d" ~ 1,
     is.na(spkrac) ~ NA_real_
   ))
 
 gss <- gss|>
   mutate(colrac = case_when(
-    colrach %in% 4 ~ 0,
+    colrac %in% 4 ~ 0,
     colrac %in% 5 ~ 1,
     is_tagged_na(colrac) & na_tag(colrac) == "d" ~ 1,
     is.na(colrac) ~ 1
@@ -151,8 +151,22 @@ gss <- gss|>
 
 # Replicate figures
 # Figure 1: 0-15 GSS Modified Stouffer Tolerance Battery, 1976-2024
+
+gss <- gss |>
+  mutate(intolerance_score = spkath + colath + libath +
+           spkrac + colrac + librac +
+           spkcom + colcom + libcom +
+           spkmil + colmil + libmil +
+           spkhomo + colhomo + libhomo)
+
 # Take the mean score of all respondents by year
-score_total <- gss$
+figure1 <- gss |>
+  group_by(year) |>
+  summarize(mean_intolerance = mean(intolerance_score, na.rm = TRUE))
+
+figure1
+
+
   
   
 
