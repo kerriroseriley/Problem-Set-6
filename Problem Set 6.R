@@ -1,5 +1,5 @@
 
-
+# Import modules
 library(tidyverse)
 library(haven)
 
@@ -11,7 +11,8 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 # Checking variables labels and values - Example
 gss$spkath
 
-# Athiests Variables and Recoding
+# Variables and Recoding
+
 # spkath, colath, libath
 gss <- gss|>
   mutate(spkath = case_when(
@@ -105,7 +106,6 @@ gss <- gss|>
     libmil %in% 2 ~ 1,
     is.na(libmil) ~ NA_real_
   ))
-
 
 
 # Homosexuals
