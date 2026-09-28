@@ -1,3 +1,6 @@
+# Problem Set 6
+# Author: Kerri Rose Riley
+
 
 # Import modules
 library(tidyverse)
@@ -231,7 +234,7 @@ figure5 <- gss |>
 # Remove years with no data
 figure5 <- figure5 |>
   filter(!is.nan(proportion_intolerant))
-
+ 
 # Create plot
 plot(figure5$year, figure5$proportion_intolerant,
      type = "l",
