@@ -211,18 +211,35 @@ legend("topright",
 
 
 
+# Figure 5: A Dichotomous Measure of Tolerance and Intolerance, 1976-2024
 
+# Create dichotomous measure
+gss <- gss |>
+  mutate(intolerant = case_when(
+    intolerance_score == 0 ~ 0,
+    intolerance_score > 0 ~ 1,
+    is.na(intolerance_score) ~ NA_real_
+  ))
 
+# Calculate proportion intolerant by year
+figure5 <- gss |>
+  group_by(year) |>
+  summarize(
+    proportion_intolerant = mean(intolerant, na.rm = TRUE)
+  )
 
+# Remove years with no data
+figure5 <- figure5 |>
+  filter(!is.nan(proportion_intolerant))
 
-
-
-# Figure 5: A dichotomous Measure of Tolerance and Intolerance, 1976-2024
-plot(year, y,
+# Create plot
+plot(figure5$year, figure5$proportion_intolerant,
      type = "l",
+     ylim = c(0, 1),
      main = "A Dichotomous Measure of Tolerance and Intolerance, 1976-2024",
      xlab = "Year",
      ylab = "Proportion Intolerant")
+
 
 
 # Original Work: explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
