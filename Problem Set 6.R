@@ -1,18 +1,44 @@
 
+
+library(tidyverse)
+library(haven)
+
 # Read the GSS data
 gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 
 # Variables for Analysis
 
+# Athiests
 # spkath, colath, libath
+
+# Racists
 # spkrac, colrac, librac
+
+# Communists
 # spkcom, colcom, libcom
+
+# militarists
 # spkmil, colmil, libmil
+
+# Homosexuals
 # spkhomo, colhomo, libhomo
 
+# Checking variables labels and values - Example
+gss$spkath
 
 
+
+
+# Recoding:
+
+
+
+# Replicate figures
 # Figure 1: 0-15 GSS Modified Stouffer Tolerance Battery, 1976-2024
+figure_one <-
+  
+  
+
 
 # Create plot
 plot(year, y,
