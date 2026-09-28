@@ -26,10 +26,20 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 # Checking variables labels and values - Example
 gss$spkath
 
-
-
-
 # Recoding:
+gss <- gss|>
+  mutate(spkath = case_when(
+    spkath %in% 1 ~ 0,
+    spkath %in% 2 ~ 3,
+    spkath == 6 ~ NA
+  ))
+
+gss <- gss|>
+  mutate(spkath = case_when(
+    spkath %in% 1 ~ 0,
+    spkath %in% 2 ~ 3,
+    spkath == 6 ~ NA
+  ))
 
 
 
