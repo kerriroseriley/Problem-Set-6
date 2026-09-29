@@ -266,3 +266,30 @@ plot(figure5$year, figure5$proportion_intolerant,
 # Original Work: explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
 
 
+mean 
+# CHLDIDEL - ideal number of children
+# DIVLAW - divcorce laws too lenient or restrictive
+
+
+
+
+plot(gss$year, gss$variable,
+     type = "l",
+     ylim = c(0, 1),
+     main = "A Dichotomous Measure of Tolerance and Intolerance, 1976-2024",
+     xlab = "Year",
+     ylab = "Proportion Intolerant")
+
+
+plot(gss$year, figure5$variable,
+     type = "l",
+     ylim = c(0, 1),
+     main = "A Dichotomous Measure of Tolerance and Intolerance, 1976-2024",
+     xlab = "Year",
+     ylab = "Proportion Intolerant")
+
+
+
+
+
+
