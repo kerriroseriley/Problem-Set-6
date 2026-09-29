@@ -267,24 +267,42 @@ plot(figure5$year, figure5$proportion_intolerant,
 
 
 mean 
-# CHLDIDEL - ideal number of children
-# DIVLAW - divcorce laws too lenient or restrictive
+# HEALTH
+
+gss <- gss|>
+  mutate(health = case_when(
+    health == 1 ~ 4,
+    health == 2 ~ 3,
+    health == 3 ~ 2,
+    health == 4 ~ 1,
+    # The rest is missing
+    TRUE ~ NA
+  ))
 
 
+# HAPPY
+gss <- gss|>
+  mutate(happy = case_when(
+    happy == 1 ~ 3,
+    happy == 2 ~ 2,
+    happy == 3 ~ 1,
+    # The rest is missing
+    TRUE ~ NA
+  ))
 
 
-plot(gss$year, gss$variable,
+plot(gss$year, gss$health,
      type = "l",
-     ylim = c(0, 1),
-     main = "A Dichotomous Measure of Tolerance and Intolerance, 1976-2024",
+     ylim = c(1, 4),
+     main = "Ideal Number of Children per Household (1976-2024)",
      xlab = "Year",
-     ylab = "Proportion Intolerant")
+     ylab = "Mean Number of Children")
 
 
-plot(gss$year, figure5$variable,
+plot(gss$year, gss$happy,
      type = "l",
-     ylim = c(0, 1),
-     main = "A Dichotomous Measure of Tolerance and Intolerance, 1976-2024",
+     ylim = c(1, 3),
+     main = "Measure of , 1976-2024",
      xlab = "Year",
      ylab = "Proportion Intolerant")
 
