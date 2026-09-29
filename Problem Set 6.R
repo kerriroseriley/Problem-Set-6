@@ -22,7 +22,7 @@ gss$spkath
 gss <- gss|>
   mutate(spkath = case_when(
     spkath %in% 1 ~ 0,
-    spkath %in% 2 ~ 1,
+    spkath %in% NA(d), 2 ~ 1,
     is.na(spkath) ~ NA_real_
   ))
 
@@ -48,7 +48,7 @@ gss <- gss|>
   mutate(spkrac = case_when(
     spkrac %in% 1 ~ 0,
     spkrac %in% 2 ~ 1,
-    is.na(spkrac) ~ NA_real_
+    is.na(spkrac) ~ NULL
   ))
 
 gss <- gss|>
