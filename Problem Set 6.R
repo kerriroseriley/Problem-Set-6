@@ -12,7 +12,7 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 # Variables for Analysis
 
 # Checking variables labels and values - Example
-gss$spkath
+gss$spkath 
 
 # Variables and Recoding
 # Recode to 0 if respondent agreed, Recode 1 if respondent disagreed, Recode "Don't Know" to 1
@@ -23,46 +23,52 @@ gss <- gss|>
   mutate(spkath = case_when(
     spkath == 1 ~ 0,
     spkath == 2 ~ 1,
-    is.na(spkath) ~ 1
+    haven::is_tagged_na(spkath) & haven::na_tag(spkath) == "d" ~ 1,
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(colath = case_when(
     colath == 4 ~ 0,
     colath == 5 ~ 1,
-    is.na(colath) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(libath = case_when(
     libath == 1 ~ 0,
     libath == 2 ~ 1,
-    is.na(libath) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 
 # Racists
-# Recode dont know as 1
 # spkrac, colrac, librac
 gss <- gss|>
   mutate(spkrac = case_when(
     spkrac == 1 ~ 0,
     spkrac == 2 ~ 1,
-    is.na(spkrac) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(colrac = case_when(
     colrac == 4 ~ 0,
     colrac == 5 ~ 1,
-    is.na(colrac) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(librac = case_when(
     librac == 1 ~ 0,
     librac == 2 ~ 1,
-    is.na(librac) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 
@@ -72,21 +78,24 @@ gss <- gss|>
   mutate(spkcom = case_when(
     spkcom == 1 ~ 0,
     spkcom == 2 ~ 1,
-    is.na(spkcom) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(colcom = case_when(
     colcom == 4 ~ 0,
     colcom == 5 ~ 1,
-    is.na(colcom) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(libcom = case_when(
     libcom == 1 ~ 0,
     libcom == 2 ~ 1,
-    is.na(libcom) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 
@@ -96,21 +105,24 @@ gss <- gss|>
   mutate(spkmil = case_when(
     spkmil == 1 ~ 0,
     spkmil == 2 ~ 1,
-    is.na(spkmil) ~ NA
+   # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(colmil = case_when(
     colmil == 4 ~ 0,
-    colmil ==% 5 ~ 1,
-    is.na(colmil) ~ NA
+    colmil == 5 ~ 1,
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(libmil = case_when(
     libmil == 1 ~ 0,
     libmil == 2 ~ 1,
-    is.na(libmil) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 
@@ -120,26 +132,30 @@ gss <- gss|>
   mutate(spkhomo = case_when(
     spkhomo == 1 ~ 0,
     spkhomo == 2 ~ 1,
-    is.na(spkhomo) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(colhomo = case_when(
     colhomo == 4 ~ 0,
     colhomo == 5 ~ 1,
-    is.na(colhomo) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 gss <- gss|>
   mutate(libhomo = case_when(
     libhomo == 1 ~ 0,
     libhomo == 2 ~ 1,
-    is.na(libhomo) ~ NA
+    # The rest is missing
+    TRUE ~ NA
   ))
 
 # Replicate figures
 # Figure 1: 0-15 GSS Modified Stouffer Tolerance Battery, 1976-2024
 
+# Create intolerance score by adding together the sum of all the values for the respondent.
 gss <- gss |>
   mutate(intolerance_score = spkath + colath + libath +
            spkrac + colrac + librac +
@@ -147,19 +163,20 @@ gss <- gss |>
            spkmil + colmil + libmil +
            spkhomo + colhomo + libhomo)
 
-# Take the mean score of all respondents by year'
-
+# Take the mean score of all respondents by year
 figure1 <- gss |>
   group_by(year) |>
   summarize(mean_intolerance = mean(intolerance_score, na.rm = TRUE))
 
+# Take figure1 and filter
 figure1 <- figure1 |>
   filter(!is.nan(mean_intolerance))
 
+# Show table of data for figure1
 figure1
 
 
-# Create plot
+# Create plot 1
 plot(figure1$year, figure1$mean_intolerance,
      # Setting theplot type to a line plot
      type = "l",
@@ -215,13 +232,17 @@ legend("topright",
 
 
 # Figure 5: A Dichotomous Measure of Tolerance and Intolerance, 1976-2024
+# If a respondent gives at least one intolerant response among the 15 items, they are classified as intolerant. (=1)
+
 
 # Create dichotomous measure
+
 gss <- gss |>
   mutate(intolerant = case_when(
     intolerance_score == 0 ~ 0,
     intolerance_score > 0 ~ 1,
-    is.na(intolerance_score) ~ NA_real_
+    # If there is a missing value for intolerance_score, keep it missing
+    TRUE ~ NA
   ))
 
 # Calculate proportion intolerant by year
@@ -229,10 +250,7 @@ figure5 <- gss |>
   group_by(year) |>
   summarize(
     proportion_intolerant = mean(intolerant, na.rm = TRUE)
-  )
-
-# Remove years with no data
-figure5 <- figure5 |>
+  ) |> # Remove years with no data
   filter(!is.nan(proportion_intolerant))
  
 # Create plot
