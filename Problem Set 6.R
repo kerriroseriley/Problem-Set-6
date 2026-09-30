@@ -279,35 +279,71 @@ gss <- gss|>
     TRUE ~ NA
   ))
 
+# Take the mean health score of all respondents by year
+health_plot <- gss |>
+  group_by(year) |>
+  summarize(
+    mean_health = mean(health, na.rm = TRUE)
+  )
 
-# HAPPY
-gss <- gss|>
+# Remove years without data
+health_plot <- health_plot |>
+  filter(!is.nan(mean_health))
+
+
+# Recode happiness so higher values represent greater happiness
+gss <- gss |>
   mutate(happy = case_when(
-    happy == 1 ~ 3,
-    happy == 2 ~ 2,
-    happy == 3 ~ 1,
+    happy == 1 ~ 3,  # Very happy
+    happy == 2 ~ 2,  # Pretty happy
+    happy == 3 ~ 1,  # Not too happy
     # The rest is missing
     TRUE ~ NA
   ))
 
 
-plot(gss$year, gss$health,
+# Take the mean happiness score of all respondents by year
+happy_plot <- gss |>
+  group_by(year) |>
+  summarize(
+    mean_happy = mean(happy, na.rm = TRUE)
+  )
+
+
+# Remove years without data
+happy_plot <- happy_plot |>
+  filter(!is.nan(mean_happy))
+
+
+
+# Create health plot
+plot(health_plot$year, health_plot$mean_health,
+     # Setting the plot type to a line plot
      type = "l",
+     # Parameters for y-axis
      ylim = c(1, 4),
-     main = "Ideal Number of Children per Household (1976-2024)",
+     # Main title of figure
+     main = "Self-Reported Health, 1972-2024",
+     # X-axis label
      xlab = "Year",
-     ylab = "Mean Number of Children")
+     # Y-axis label
+     ylab = "Mean Health Score")
 
 
-plot(gss$year, gss$happy,
+
+
+# Create happiness plot
+plot(happy_plot$year, happy_plot$mean_happy,
+     # Setting the plot type to a line plot
      type = "l",
+     # Parameters for y-axis
      ylim = c(1, 3),
-     main = "Measure of , 1976-2024",
+     # Main title of figure
+     main = "Self-Reported Happiness, 1972-2024",
+     # X-axis label
      xlab = "Year",
-     ylab = "Proportion Intolerant")
-
-
-
+     # Y-axis label
+     ylab = "Mean Happiness Score")
 
 
 
