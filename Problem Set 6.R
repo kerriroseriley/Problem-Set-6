@@ -23,7 +23,7 @@ gss <- gss|>
   mutate(spkath = case_when(
     spkath == 1 ~ 0,
     spkath == 2 ~ 1,
-    haven::is_tagged_na(spkath) & haven::na_tag(spkath) == "d" ~ 1,
+    TRUE ~ NA
     # The rest is missing
     TRUE ~ NA
   ))
@@ -266,7 +266,7 @@ plot(figure5$year, figure5$proportion_intolerant,
 # Original Work: Explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
 
 
-# HEALTH
+
 # HEALTH
 
 gss <- gss |>
