@@ -263,7 +263,7 @@ plot(figure5$year, figure5$proportion_intolerant,
 
 
 
-# Original Work: explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
+# Original Work: Explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
 
 
 # HEALTH
