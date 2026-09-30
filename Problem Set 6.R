@@ -266,10 +266,10 @@ plot(figure5$year, figure5$proportion_intolerant,
 # Original Work: explore the code book for the GSS. Find two interesting variables and create compelling univariate graphs to illustrate their central tendency, distribution, and spread.
 
 
-mean 
+# HEALTH
 # HEALTH
 
-gss <- gss|>
+gss <- gss |>
   mutate(health = case_when(
     health == 1 ~ 4,
     health == 2 ~ 3,
@@ -279,71 +279,41 @@ gss <- gss|>
     TRUE ~ NA
   ))
 
-# Take the mean health score of all respondents by year
-health_plot <- gss |>
-  group_by(year) |>
-  summarize(
-    mean_health = mean(health, na.rm = TRUE)
-  )
+# Central tendency and spread
+mean(gss$health, na.rm = TRUE)
+sd(gss$health, na.rm = TRUE)
 
-# Remove years without data
-health_plot <- health_plot |>
-  filter(!is.nan(mean_health))
+# Distribution of Health Responses
+barplot(table(gss$health),
+        main = "Distribution of Self-Reported Health",
+        xlab = "Health",
+        ylab = "Number of Respondents",
+        names.arg = c("Poor", "Fair", "Good", "Excellent"))
 
 
-# Recode happiness so higher values represent greater happiness
+# HAPPINESS
+
 gss <- gss |>
   mutate(happy = case_when(
-    happy == 1 ~ 3,  # Very happy
-    happy == 2 ~ 2,  # Pretty happy
-    happy == 3 ~ 1,  # Not too happy
+    happy == 1 ~ 3,
+    happy == 2 ~ 2,
+    happy == 3 ~ 1,
     # The rest is missing
     TRUE ~ NA
   ))
 
+# Central tendency and spread
+mean(gss$happy, na.rm = TRUE)
+sd(gss$happy, na.rm = TRUE)
 
-# Take the mean happiness score of all respondents by year
-happy_plot <- gss |>
-  group_by(year) |>
-  summarize(
-    mean_happy = mean(happy, na.rm = TRUE)
-  )
-
-
-# Remove years without data
-happy_plot <- happy_plot |>
-  filter(!is.nan(mean_happy))
+# Distribution of Happiness Responses
+barplot(table(gss$happy),
+        main = "Distribution of Self-Reported Happiness",
+        xlab = "Happiness",
+        ylab = "Number of Respondents",
+        names.arg = c("Not Too Happy", "Pretty Happy", "Very Happy"))
 
 
-
-# Create health plot
-plot(health_plot$year, health_plot$mean_health,
-     # Setting the plot type to a line plot
-     type = "l",
-     # Parameters for y-axis
-     ylim = c(1, 4),
-     # Main title of figure
-     main = "Self-Reported Health, 1972-2024",
-     # X-axis label
-     xlab = "Year",
-     # Y-axis label
-     ylab = "Mean Health Score")
-
-
-
-
-# Create happiness plot
-plot(happy_plot$year, happy_plot$mean_happy,
-     # Setting the plot type to a line plot
-     type = "l",
-     # Parameters for y-axis
-     ylim = c(1, 3),
-     # Main title of figure
-     main = "Self-Reported Happiness, 1972-2024",
-     # X-axis label
-     xlab = "Year",
-     # Y-axis label
-     ylab = "Mean Happiness Score")
 
 
 
