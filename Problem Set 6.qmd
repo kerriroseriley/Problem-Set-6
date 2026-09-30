@@ -18,7 +18,7 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 
 ```
 
-Recoding for Replication
+## Recoding for Replication
 
 ```{r}
 # spkath, colath, libath
@@ -156,7 +156,8 @@ gss <- gss|>
   ))
 ```
 
-Replicate Figure 1
+
+## Replicate Figure 1
 ```{r}
 
 # Replicate figures
@@ -325,14 +326,14 @@ barplot(table(gss$happy),
 
 
 
-Where did you encounter problems with this replication? Was there anything that was particularly tricky?
+### Where did you encounter problems with this replication? Was there anything that was particularly tricky?
 
-I had a difficult time identifying which variables to use in the code book to replicate the figures, as there were over 6,000 columns. 
-
-
-How would you interpret (in other words, explain to a general audience) what Mondak and Sanders found in figures 1, 2, and 5?
+### I had a difficult time identifying which variables to use in the code book to replicate the figures, as there were over 6,000 columns. 
 
 
+### How would you interpret (in other words, explain to a general audience) what Mondak and Sanders found in figures 1, 2, and 5?
 
-Has anything changed since 1998 that would alter the substantive takeaway points in their findings?
+
+
+### Has anything changed since 1998 that would alter the substantive takeaway points in their findings?
 
