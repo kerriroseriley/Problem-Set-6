@@ -286,7 +286,7 @@ gss <- gss |>
     health == 3 ~ 2,
     health == 4 ~ 1,
     # The rest is missing
-    TRUE ~ NA
+    TRUE ~ NA_real_
   ))
 
 # Central tendency and spread
@@ -309,7 +309,7 @@ gss <- gss |>
     happy == 2 ~ 2,
     happy == 3 ~ 1,
     # The rest is missing
-    TRUE ~ NA
+    TRUE ~ NA_real_
   ))
 
 # Central tendency and spread
