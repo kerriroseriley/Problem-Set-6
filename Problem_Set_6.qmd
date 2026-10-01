@@ -22,13 +22,21 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 
 ```{r}
 # spkath, colath, libath
+
+# 
+# Take the gss dataset and save changes back into gss
 gss <- gss|>
+  # Modify the spkath variable
   mutate(spkath = case_when(
+    # If spkath equals 1, change it to 0
     spkath == 1 ~ 0,
+     # If spkath equals 2, change it to 1
     spkath == 2 ~ 1,
-    # The rest is missing
+    # All other responses are coded as missing
     TRUE ~ NA
   ))
+
+# Now Repeat for other variables in Score
 
 gss <- gss|>
   mutate(colath = case_when(
