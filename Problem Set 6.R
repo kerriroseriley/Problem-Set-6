@@ -25,7 +25,6 @@ gss <- gss|>
     spkath == 2 ~ 1,
     TRUE ~ NA
     # The rest is missing
-    TRUE ~ NA
   ))
 
 gss <- gss|>
