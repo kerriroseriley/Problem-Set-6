@@ -22,14 +22,21 @@ gss <- read_dta("~/Documents/PAI741/Problem Set 6/Data/gss7224_r1.dta")
 
 ```{r}
 # spkath, colath, libath
+
+# 
+# Take the gss dataset and save changes back into gss
 gss <- gss|>
+  # Modify the spkath variable
   mutate(spkath = case_when(
+    # If spkath equals 1, change it to 0
     spkath == 1 ~ 0,
+     # If spkath equals 2, change it to 1
     spkath == 2 ~ 1,
-    TRUE ~ NA
-    # The rest is missing
+    # All other responses are coded as missing
     TRUE ~ NA
   ))
+
+# Now Repeat for other variables in Score
 
 gss <- gss|>
   mutate(colath = case_when(
@@ -199,7 +206,7 @@ plot(figure1$year, figure1$mean_intolerance,
      )
 ```
 
-Replicate Figure 2
+## Replicate Figure 2
 ```{r}
 # Figure 2: Intolerance Towards Racists and Homosexuals, 1976-2024
 
@@ -239,7 +246,7 @@ legend("topright",
        lty = c(1, 2))
 ```
 
-Repliate Figure 5
+## Replicate Figure 5
 ```{r}
 
 # Figure 5: A Dichotomous Measure of Tolerance and Intolerance, 1976-2024
@@ -274,7 +281,7 @@ plot(figure5$year, figure5$proportion_intolerant,
 ```
 
 
-Original Work
+## Original Work
 ```{r}
 
 # HEALTH
@@ -328,12 +335,18 @@ barplot(table(gss$happy),
 
 ### Where did you encounter problems with this replication? Was there anything that was particularly tricky?
 
-### I had a difficult time identifying which variables to use in the code book to replicate the figures, as there were over 6,000 columns. 
+#### I had a difficult time identifying which variables to use in the code book to replicate the figures, as there were over 6,000 columns. 
 
 
 ### How would you interpret (in other words, explain to a general audience) what Mondak and Sanders found in figures 1, 2, and 5?
 
+#### Figure 1 Interpretation: According to Mondak and Sanders, the Americans became more tolerant. Figure 1 uses the 0-15 GSS tolerance scale, where a higher score indicates greater intolerance. The average score fell from 7.24 in 1976 to 5.28 in 1998. However, Mondak and Sanders argue that people may simply have become less hostile towards some of the groups included in the survey. 
+
+#### Figure 2: Figure 2 helps explain why the authors are skeptical of Figure 1. They separate responses concerning racists and homosexuals and find very different trends.Intolerance toward homosexuals declined by more than intolerance toward racists.
+
+#### Figure 5: Figure 5 suggests the change in tolerance is much smaller. Instead of asking how many intolerant responses someone gives, they divide respondents into two categories: someone who gives zero intolerant responses is classified as tolerant, while someone who gives at least one intolerant response is classified as intolerant. The proportion classified as intolerant falls only slightly from about 85% in 1976 and 1988 to 79% in 1998, a decline of less than six percentage points.
 
 
 ### Has anything changed since 1998 that would alter the substantive takeaway points in their findings?
 
+#### My updated figures suggest that Mondak and Sander's main conclusion still holds. My extension shows that from roughly 1998 onward, the overall intolerance score does not continue falling. Instead, it fluctuates around roughly 8 in my replication and even rises somewhat in the most recent observations. So there is little evidence in my extended series of a continuing long-term movement toward greater tolerance after 1998.For figure 2, my extension shows that attitudes towards the two groups continue to move differently rather than comnverging around a common trend. This reinforces the idea that a singular tolerance score can mask substantial differences in attitudes towards a specific group. Lastly, figure 5 (continues) shows that the proportion remains pretty high and flat, suggesting that the targets of intolerance may have changes, but the proportion of intolerant respondents likely did not change substanially.  
